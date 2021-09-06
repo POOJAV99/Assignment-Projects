@@ -1,0 +1,208 @@
+mysql> create table customerinfo(customerid int primary key auto_increment,customername varchar(30),customercity varchar(30),customeraddress varchar(30),customermobile bigint unique,PAN bigint unique,customerpassword int);
+Query OK, 0 rows affected (0.67 sec)
+
+mysql> alter table customerinfo auto_increment=100;
+Query OK, 0 rows affected (0.89 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into customerinfo(customername,customercity,customeraddress,customermobile,PAN,customerpassword)values('ak','ass','aaaaa',9090909,11112222,1234);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> select * from customerinfo;
++------------+--------------+--------------+-----------------+----------------+----------+------------------+
+| customerid | customername | customercity | customeraddress | customermobile | PAN      | customerpassword |
++------------+--------------+--------------+-----------------+----------------+----------+------------------+
+|        100 | ak           | ass          | aaaaa           |        9090909 | 11112222 |             1234 |
++------------+--------------+--------------+-----------------+----------------+----------+------------------+
+
+mysql> insert into customerinfo(customername,customercity,customeraddress,customermobile,PAN,customerpassword)values('bk','bss','bbbb',8080808,11113333,2345),('ck','css','cccc',7070707,11114444,3456);
+Query OK, 2 rows affected (0.12 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> insert into customerinfo(customername,customercity,customeraddress,customermobile,PAN,customerpassword)values('dk','dss','dddd',606060,11115555,4567),('ek','ess','eeee',5050505,11116666,5678),('fk','fss','ffff',4040404,11117777,6789),('gk','gss','gggg',3030303,11118888,7890),('hk','hss','hhhh',2020202,11119999,8901),('ik','iss','iiii',1010101,11110000,9012),('jk','jss','jjjj',5151515,11111111,1231);
+Query OK, 7 rows affected (0.24 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select * from customerinfo;
++------------+--------------+--------------+-----------------+----------------+----------+------------------+
+| customerid | customername | customercity | customeraddress | customermobile | PAN      | customerpassword |
++------------+--------------+--------------+-----------------+----------------+----------+------------------+
+|        100 | ak           | ass          | aaaaa           |        9090909 | 11112222 |             1234 |
+|        103 | bk           | bss          | bbbb            |        8080808 | 11113333 |             2345 |
+|        104 | ck           | css          | cccc            |        7070707 | 11114444 |             3456 |
+|        105 | dk           | dss          | dddd            |         606060 | 11115555 |             4567 |
+|        106 | ek           | ess          | eeee            |        5050505 | 11116666 |             5678 |
+|        107 | fk           | fss          | ffff            |        4040404 | 11117777 |             6789 |
+|        108 | gk           | gss          | gggg            |        3030303 | 11118888 |             7890 |
+|        109 | hk           | hss          | hhhh            |        2020202 | 11119999 |             8901 |
+|        110 | ik           | iss          | iiii            |        1010101 | 11110000 |             9012 |
+|        111 | jk           | jss          | jjjj            |        5151515 | 11111111 |             1231 |
++------------+--------------+--------------+-----------------+----------------+----------+------------------+
+10 rows in set (0.00 sec)
+
+mysql> create table accountinfo(accountid int primary key auto_increment,customerid int,accountype varchar(30),accountbalance int,accountopendate varchar(30),accountstatus varchar(30),foreign key(customerid) references customerinfo(customerinfo));
+Query OK, 0 rows affected (0.67 sec)
+
+mysql>insert into accountinfo(customerid,accountype,accountbalance,accountopendate,accountstatus)values(100,'savings',10000,'02-12-1999','Opened');
+Query OK, 1 rows affected (0.22 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> insert into accountinfo(customerid,accountype,accountbalance,accountopendate,accountstatus)values(103,'savings',100000,'20-12-1999','Opened'),(104,'current',20000,'24-01-1972','Opened'),(105,'savings',90000,'30-05-1992','closed'),(106,'current',30000,'20-09-1999','blocked'),(107,'current',80000,'16-12-1986','closed'),(108,'savings',40000,'18-05-1999','blocked'),(109,'current',70000,'01-10-1999','Opened'),(110,'savings',50000,'16-11-1999','Opened'),(111,'savings',60000,'04-07-1964','opened');
+Query OK, 9 rows affected (0.22 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+mysql> select * from accountinfo;
++-----------+------------+------------+----------------+-----------------+---------------+
+| accountid | customerid | accountype | accountbalance | accountopendate | accountstatus |
++-----------+------------+------------+----------------+-----------------+---------------+
+|         1 |        100 | savings    |          10000 | 02-12-1999      | Opened        |
+|         2 |        103 | savings    |         100000 | 20-12-1999      | Opened        |
+|         3 |        104 | current    |          20000 | 24-01-1972      | Opened        |
+|         4 |        105 | savings    |          90000 | 30-05-1992      | closed        |
+|         5 |        106 | current    |          30000 | 20-09-1999      | blocked       |
+|         6 |        107 | current    |          80000 | 16-12-1986      | closed        |
+|         7 |        108 | savings    |          40000 | 18-05-1999      | blocked       |
+|         8 |        109 | current    |          70000 | 01-10-1999      | Opened        |
+|         9 |        110 | savings    |          50000 | 16-11-1999      | Opened        |
+|        10 |        111 | savings    |          60000 | 04-07-1964      | opened        |
++-----------+------------+------------+----------------+-----------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> create table transactioninfo(transacionid int primary key auto_increment,accountid int,transactiontype varchar(30),amount int check (amount>0),transactiondate varchar(30),foreign key(accountid) references accountinfo(accountid));
+Query OK, 0 rows affected (2.11 sec)
+
+mysql> alter table transactioninfo auto_increment=1000;
+Query OK, 0 rows affected (0.78 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into transactioninfo(accountid,transactiontype,amount,transactiondate)values(1,'Credited',200000,'2019-08-09'),(2,'debited',100000,'2019-07-12'),(3,'Credited',50000,'2020-01-07'),(4,'Credited',30000,'2020-11-02'),(5,'debited',700000,'2019-01-02'),(6,'Credited',80000,'2017-08-05'),(7,'debited',100000,'2021-08-09'),(8,'debited',200000,'2018-10-02'),(9,'Credited',500000,'2021-04-29'),(10,'Credited',60000,'2016-12-16');
+Query OK, 10 rows affected (0.21 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select * from transactioninfo;
++--------------+-----------+-----------------+--------+-----------------+
+| transacionid | accountid | transactiontype | amount | transactiondate |
++--------------+-----------+-----------------+--------+-----------------+
+|         1000 |         1 | Credited        | 200000 | 2019-08-09      |
+|         1001 |         2 | debited         | 100000 | 2019-07-12      |
+|         1002 |         3 | Credited        |  50000 | 2020-01-07      |
+|         1003 |         4 | Credited        |  30000 | 2020-11-02      |
+|         1004 |         5 | debited         | 700000 | 2019-01-02      |
+|         1005 |         6 | Credited        |  80000 | 2017-08-05      |
+|         1006 |         7 | debited         | 100000 | 2021-08-09      |
+|         1007 |         8 | debited         | 200000 | 2018-10-02      |
+|         1008 |         9 | Credited        | 500000 | 2021-04-29      |
+|         1009 |        10 | Credited        |  60000 | 2016-12-16      |
++--------------+-----------+-----------------+--------+-----------------+
+10 rows in set (0.00 sec)
+
+update transactioninfo set accountid=3 where transactiontype='Credited';
+Query OK, 5 rows affected (0.10 sec)
+Rows matched: 6  Changed: 5  Warnings: 0
+
+mysql> select * from transactioninfo;
++--------------+-----------+-----------------+--------+-----------------+
+| transacionid | accountid | transactiontype | amount | transactiondate |
++--------------+-----------+-----------------+--------+-----------------+
+|         1000 |         3 | Credited        | 200000 | 2019-08-09      |
+|         1001 |         2 | debited         | 100000 | 2019-07-12      |
+|         1002 |         3 | Credited        |  50000 | 2020-01-07      |
+|         1003 |         3 | Credited        |  30000 | 2020-11-02      |
+|         1004 |         5 | debited         | 700000 | 2019-01-02      |
+|         1005 |         3 | Credited        |  80000 | 2017-08-05      |
+|         1006 |         7 | debited         | 100000 | 2021-08-09      |
+|         1007 |         8 | debited         | 200000 | 2018-10-02      |
+|         1008 |         3 | Credited        | 500000 | 2021-04-29      |
+|         1009 |         3 | Credited        |  60000 | 2016-12-16      |
++--------------+-----------+-----------------+--------+-----------------+
+10 rows in set (0.10 sec)
+
+mysql> select * from transactioninfo where accountid=3 order by transactiondate desc limit 5;
++--------------+-----------+-----------------+--------+-----------------+
+| transacionid | accountid | transactiontype | amount | transactiondate |
++--------------+-----------+-----------------+--------+-----------------+
+|         1008 |         3 | Credited        | 500000 | 2021-04-29      |
+|         1003 |         3 | Credited        |  30000 | 2020-11-02      |
+|         1002 |         3 | Credited        |  50000 | 2020-01-07      |
+|         1000 |         3 | Credited        | 200000 | 2019-08-09      |
+|         1005 |         3 | Credited        |  80000 | 2017-08-05      |
++--------------+-----------+-----------------+--------+-----------------+
+5 rows in set (0.07 sec)
+
+mysql> select * from  accountinfo where customerid=107;
++-----------+------------+------------+----------------+-----------------+---------------+
+| accountid | customerid | accountype | accountbalance | accountopendate | accountstatus |
++-----------+------------+------------+----------------+-----------------+---------------+
+|         6 |        107 | current    |          80000 | 16-12-1986      | closed        |
++-----------+------------+------------+----------------+-----------------+---------------+
+1 row in set (0.06 sec)
+
+mysql> select a.accountid,a.accountbalance,t.transacionid,t.amount,t.transactiontype from accountinfo a left join transactioninfo t on a.accountid=t.accountid union select a.accountid,a.accountbalance,t.transacionid,t.amount,t.transactiontype from accountinfo a right join transactioninfo t on a.accountid=t.accountid;
++-----------+----------------+--------------+--------+-----------------+
+| accountid | accountbalance | transacionid | amount | transactiontype |
++-----------+----------------+--------------+--------+-----------------+
+|         1 |          10000 |         NULL |   NULL | NULL            |
+|         2 |         100000 |         1001 | 100000 | debited         |
+|         3 |          20000 |         1000 | 200000 | Credited        |
+|         3 |          20000 |         1002 |  50000 | Credited        |
+|         3 |          20000 |         1003 |  30000 | Credited        |
+|         3 |          20000 |         1005 |  80000 | Credited        |
+|         3 |          20000 |         1008 | 500000 | Credited        |
+|         3 |          20000 |         1009 |  60000 | Credited        |
+|         4 |          90000 |         NULL |   NULL | NULL            |
+|         5 |          30000 |         1004 | 700000 | debited         |
+|         6 |          80000 |         NULL |   NULL | NULL            |
+|         7 |          40000 |         1006 | 100000 | debited         |
+|         8 |          70000 |         1007 | 200000 | debited         |
+|         9 |          50000 |         NULL |   NULL | NULL            |
+|        10 |          60000 |         NULL |   NULL | NULL            |
++-----------+----------------+--------------+--------+-----------------+
+15 rows in set (0.12 sec)
+
+mysql> select c.customerid,c.customername,c.customeraddress,c.customermobile,a.accountid,a.accountbalance from customerinfo c left join accountinfo a on c.customerid=a.customerid union select c.customerid,c.customername,c.customeraddress,c.customermobile,a.accountid,a.accountbalance from customerinfo c right join accountinfo a on c.customerid=a.customerid;
++------------+--------------+-----------------+----------------+-----------+----------------+
+| customerid | customername | customeraddress | customermobile | accountid | accountbalance |
++------------+--------------+-----------------+----------------+-----------+----------------+
+|        100 | ak           | aaaaa           |        9090909 |         1 |          10000 |
+|        103 | bk           | bbbb            |        8080808 |         2 |         100000 |
+|        104 | ck           | cccc            |        7070707 |         3 |          20000 |
+|        105 | dk           | dddd            |         606060 |         4 |          90000 |
+|        106 | ek           | eeee            |        5050505 |         5 |          30000 |
+|        107 | fk           | ffff            |        4040404 |         6 |          80000 |
+|        108 | gk           | gggg            |        3030303 |         7 |          40000 |
+|        109 | hk           | hhhh            |        2020202 |         8 |          70000 |
+|        110 | ik           | iiii            |        1010101 |         9 |          50000 |
+|        111 | jk           | jjjj            |        5151515 |        10 |          60000 |
++------------+--------------+-----------------+----------------+-----------+----------------+
+10 rows in set (0.14 sec)
+
+mysql> select c.customerid,c.customername,c.customeraddress,c.customermobile,a.accountid,a.accountbalance,t.transacionid,t.amount,t.transactiontype from customerinfo c natural join accountinfo a natural join transactioninfo t;
++------------+--------------+-----------------+----------------+-----------+----------------+--------------+--------+-----------------+
+| customerid | customername | customeraddress | customermobile | accountid | accountbalance | transacionid | amount | transactiontype |
++------------+--------------+-----------------+----------------+-----------+----------------+--------------+--------+-----------------+
+|        104 | ck           | cccc            |        7070707 |         3 |          20000 |         1000 | 200000 | Credited        |
+|        103 | bk           | bbbb            |        8080808 |         2 |         100000 |         1001 | 100000 | debited         |
+|        104 | ck           | cccc            |        7070707 |         3 |          20000 |         1002 |  50000 | Credited        |
+|        104 | ck           | cccc            |        7070707 |         3 |          20000 |         1003 |  30000 | Credited        |
+|        106 | ek           | eeee            |        5050505 |         5 |          30000 |         1004 | 700000 | debited         |
+|        104 | ck           | cccc            |        7070707 |         3 |          20000 |         1005 |  80000 | Credited        |
+|        108 | gk           | gggg            |        3030303 |         7 |          40000 |         1006 | 100000 | debited         |
+|        109 | hk           | hhhh            |        2020202 |         8 |          70000 |         1007 | 200000 | debited         |
+|        104 | ck           | cccc            |        7070707 |         3 |          20000 |         1008 | 500000 | Credited        |
+|        104 | ck           | cccc            |        7070707 |         3 |          20000 |         1009 |  60000 | Credited        |
++------------+--------------+-----------------+----------------+-----------+----------------+--------------+--------+-----------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from transactioninfo where transactiondate between '2019-01-01' and '2021-12-12';
++--------------+-----------+-----------------+--------+-----------------+
+| transacionid | accountid | transactiontype | amount | transactiondate |
++--------------+-----------+-----------------+--------+-----------------+
+|         1000 |         3 | Credited        | 200000 | 2019-08-09      |
+|         1001 |         2 | debited         | 100000 | 2019-07-12      |
+|         1002 |         3 | Credited        |  50000 | 2020-01-07      |
+|         1003 |         3 | Credited        |  30000 | 2020-11-02      |
+|         1004 |         5 | debited         | 700000 | 2019-01-02      |
+|         1006 |         7 | debited         | 100000 | 2021-08-09      |
+|         1008 |         3 | Credited        | 500000 | 2021-04-29      |
++--------------+-----------+-----------------+--------+-----------------+
+7 rows in set (0.00 sec)

@@ -1,0 +1,201 @@
+mysql> create table restaurants(restaurantid int primary key auto_increment,restaurantname varchar(30),restaurantaddress varchar(30),restaurantcity varchar(30),contactno bigint);
+Query OK, 0 rows affected (1.71 sec)
+
+mysql> alter table restaurants auto_increment=100;
+Query OK, 0 rows affected (0.48 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into restaurants(restaurantName,restaurantAddress,restaurantCity,contactno)values('as restaurant','ak','asss',9090909),('bs restaurant','bk','bsss',8080808),('cs restaurant','ck','csss',7070707),('ds restaurant','dk','dsss',6060606),('es restaurant','ek','esss',5050505);
+Query OK, 5 rows affected (0.27 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from restaurants;
++--------------+----------------+-------------------+----------------+-----------+
+| restaurantid | restaurantname | restaurantaddress | restaurantcity | contactno |
++--------------+----------------+-------------------+----------------+-----------+
+|          100 | as restaurant  | ak                | asss           |   9090909 |
+|          101 | bs restaurant  | bk                | bsss           |   8080808 |
+|          102 | cs restaurant  | ck                | csss           |   7070707 |
+|          103 | ds restaurant  | dk                | dsss           |   6060606 |
+|          104 | es restaurant  | ek                | esss           |   5050505 |
++--------------+----------------+-------------------+----------------+-----------+
+5 rows in set (0.13 sec)
+
+mysql> create table resmenu(menuid int primary key auto_increment,restid int,menuname varchar(30),menutype varchar(30),menucategory varchar(30),menuprice bigint,menudesc varchar(50),foreign key(restid) references restaurants(restaurantid));
+Query OK, 0 rows affected (1.60 sec)
+
+mysql> alter table resmenu auto_increment=1000;
+Query OK, 0 rows affected (0.41 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into resmenu(restid,menuname,menutype,menucategory,menuprice,menudesc)values(100,'chicken briyani','non-veg','Indian',180,'chicken briyani is a tasty food');
+Query OK, 1 row affected (0.22 sec)
+
+mysql> insert into resmenu(restid,menuname,menutype,menucategory,menuprice,menudesc)values(100,'egg fried rice','non-veg','chinese',80,'egg fried rice is a tasty food'),(100,'chicken noodles','non-veg','chinese',100,'chicken noodles is a tasty food'),(101,'chappathi','veg','Indian',50,'chappathi is a tasty food'),(101,'dosa','veg','chinese',60,'dosa is a tasty food'),(101,'naan with chicken gravy','non-veg','chinese',250,'naan is a tasty food'),(102,'idly','veg','Indian',30,'idly is a tasty food'),(102,'chicken fried rice','non-veg','chinese',120,'chicken fried rice is a tasty food'),(103,'egg noodles','non-veg','chinese',80,'egg noodles is a tasty food'),(103,'boori','veg','Indian',50,'Boori is a tasty food'),(104,'parotta','non-veg','indian',40,'parotta is a tasty food');
+Query OK, 10 rows affected (0.16 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select * from resmenu;
++--------+--------+-------------------------+----------+--------------+-----------+------------------------------------+
+| menuid | restid | menuname                | menutype | menucategory | menuprice | menudesc                           |
++--------+--------+-------------------------+----------+--------------+-----------+------------------------------------+
+|   1000 |    100 | chicken briyani         | non-veg  | Indian       |       180 | chicken briyani is a tasty food    |
+|   1011 |    100 | egg fried rice          | non-veg  | chinese      |        80 | egg fried rice is a tasty food     |
+|   1012 |    100 | chicken noodles         | non-veg  | chinese      |       100 | chicken noodles is a tasty food    |
+|   1013 |    101 | chappathi               | veg      | Indian       |        50 | chappathi is a tasty food          |
+|   1014 |    101 | dosa                    | veg      | chinese      |        60 | dosa is a tasty food               |
+|   1015 |    101 | naan with chicken gravy | non-veg  | chinese      |       250 | naan is a tasty food               |
+|   1016 |    102 | idly                    | veg      | Indian       |        30 | idly is a tasty food               |
+|   1017 |    102 | chicken fried rice      | non-veg  | chinese      |       120 | chicken fried rice is a tasty food |
+|   1018 |    103 | egg noodles             | non-veg  | chinese      |        80 | egg noodles is a tasty food        |
+|   1019 |    103 | boori                   | veg      | Indian       |        50 | Boori is a tasty food              |
+|   1020 |    104 | parotta                 | non-veg  | indian       |        40 | parotta is a tasty food            |
++--------+--------+-------------------------+----------+--------------+-----------+------------------------------------+
+11 rows in set (0.11 sec)
+
+mysql> create table customer(customerid varchar(40) primary key,customername varchar(30),customercity varchar(30),customerdob varchar(30),customergender varchar(30),customerpassword int);
+Query OK, 0 rows affected (1.94 sec)
+
+mysql> insert into customer(customerid,customername,customercity,customerdob,customergender,customerpassword)values('aa@gmail.com','aa','bss','02-12-1999','female',1234),('bb@gmail.com','bb','ass','20-12-1999','male',2345),('cc@gmail.com','cc','ess','13-10-1989','female',3456),('dd@gmail.com','dd','css','18-05-1991','female',4567),('ee@gmail.com','ee','dss','04-07-1964','male',5678);
+Query OK, 5 rows affected (0.30 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from customer;
++--------------+--------------+--------------+-------------+----------------+------------------+
+| customerid   | customername | customercity | customerdob | customergender | customerpassword |
++--------------+--------------+--------------+-------------+----------------+------------------+
+| aa@gmail.com | aa           | bss          | 02-12-1999  | female         |             1234 |
+| bb@gmail.com | bb           | ass          | 20-12-1999  | male           |             2345 |
+| cc@gmail.com | cc           | ess          | 13-10-1989  | female         |             3456 |
+| dd@gmail.com | dd           | css          | 18-05-1991  | female         |             4567 |
+| ee@gmail.com | ee           | dss          | 04-07-1964  | male           |             5678 |
++--------------+--------------+--------------+-------------+----------------+------------------+
+5 rows in set (0.00 sec)
+
+mysql> create table orders(orderid int primary key auto_increment,customerid varchar(40),orderdate varchar(30),deliveryaddress varchar(30),orderstatus varchar(30),foreign key(customerid) references customer(customerid));
+Query OK, 0 rows affected (2.17 sec)
+
+mysql> alter table orders auto_increment=200;
+Query OK, 0 rows affected (0.30 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into orders(customerid,orderdate,deliveryaddress,orderstatus)values('aa@gmail.com','2021-06-07','bss','confirmed');
+Query OK, 1 row affected (0.29 sec)
+
+mysql> insert into orders(customerid,orderdate,deliveryaddress,orderstatus)values('aa@gmail.com','2021-06-17','bss','confirmed'),('aa@gmail.com','2020-12-12','bss','cancelled'),('aa@gmail.com','2021-05-12','bss','confirmed'),('aa@gmail.com','2021-02-24','bss','cancelled'),('aa@gmail.com','2021-03-08','bss','confirmed'),('bb@gmail.com','2019-10-05','ass','confirmed'),('bb@gmail.com','2021-06-30','ass','confirmed'),('cc@gmail.com','2021-07-19','ess','cancelled'),('cc@gmail.com','2020-11-16','ess','confirmed'),('dd@gmail.com','2021-04-29','css','confirmed'),('ee@gmail.com','2021-01-24','dss','confirmed');
+Query OK, 11 rows affected (0.41 sec)
+Records: 11  Duplicates: 0  Warnings: 0
+
+mysql> select * from orders;
++---------+--------------+------------+-----------------+-------------+
+| orderid | customerid   | orderdate  | deliveryaddress | orderstatus |
++---------+--------------+------------+-----------------+-------------+
+|     200 | aa@gmail.com | 2021-06-07 | bss             | confirmed   |
+|     201 | aa@gmail.com | 2021-06-17 | bss             | confirmed   |
+|     202 | aa@gmail.com | 2020-12-12 | bss             | cancelled   |
+|     203 | aa@gmail.com | 2021-05-12 | bss             | confirmed   |
+|     204 | aa@gmail.com | 2021-02-24 | bss             | cancelled   |
+|     205 | aa@gmail.com | 2021-03-08 | bss             | confirmed   |
+|     206 | bb@gmail.com | 2019-10-05 | ass             | confirmed   |
+|     207 | bb@gmail.com | 2021-06-30 | ass             | confirmed   |
+|     208 | cc@gmail.com | 2021-07-19 | ess             | cancelled   |
+|     209 | cc@gmail.com | 2020-11-16 | ess             | confirmed   |
+|     210 | dd@gmail.com | 2021-04-29 | css             | confirmed   |
+|     211 | ee@gmail.com | 2021-01-24 | dss             | confirmed   |
++---------+--------------+------------+-----------------+-------------+
+12 rows in set (0.00 sec)
+
+mysql> create table ordermenus(orderid int,menuid int,menuqty int,menuprice bigint,foreign key(orderid) references orders(orderid),foreign key(menuid) references resmenu(menuid));
+Query OK, 0 rows affected (2.60 sec)
+
+mysql> insert into ordermenus(orderid,menuid,menuqty,menuprice)values(200,1000,2,360),(201,1012,1,100),(202,1014,1,60),(203,1016,2,60),(204,1018,1,80),(205,1020,2,80),(206,1011,2,160),(207,1013,1,50),(208,1015,2,500),(209,1017,1,120),(210,1019,2,100),(211,1015,1,250);
+Query OK, 12 rows affected (0.15 sec)
+Records: 12  Duplicates: 0  Warnings: 0
+
+mysql> select * from ordermenus;
++---------+--------+---------+-----------+
+| orderid | menuid | menuqty | menuprice |
++---------+--------+---------+-----------+
+|     200 |   1000 |       2 |       360 |
+|     201 |   1012 |       1 |       100 |
+|     202 |   1014 |       1 |        60 |
+|     203 |   1016 |       2 |        60 |
+|     204 |   1018 |       1 |        80 |
+|     205 |   1020 |       2 |        80 |
+|     206 |   1011 |       2 |       160 |
+|     207 |   1013 |       1 |        50 |
+|     208 |   1015 |       2 |       500 |
+|     209 |   1017 |       1 |       120 |
+|     210 |   1019 |       2 |       100 |
+|     211 |   1015 |       1 |       250 |
++---------+--------+---------+-----------+
+12 rows in set (0.00 sec)
+
+mysql> select * from restaurants where restaurantcity="csss";
++--------------+----------------+-------------------+----------------+-----------+
+| restaurantid | restaurantname | restaurantaddress | restaurantcity | contactno |
++--------------+----------------+-------------------+----------------+-----------+
+|          102 | cs restaurant  | ck                | csss           |   7070707 |
++--------------+----------------+-------------------+----------------+-----------+
+
+mysql> select r.restaurantid,r.restaurantname,m.menuid,m.menuname,m.menuprice from restaurants r left join resmenu m on r.restaurantid=m.restid union select r.restaurantid,r.restaurantname,m.menuid,m.menuname,m.menuprice from restaurants r right join resmenu m on r.restaurantid=m.restid;
++--------------+----------------+--------+-------------------------+-----------+
+| restaurantid | restaurantname | menuid | menuname                | menuprice |
++--------------+----------------+--------+-------------------------+-----------+
+|          100 | as restaurant  |   1000 | chicken briyani         |       180 |
+|          100 | as restaurant  |   1011 | egg fried rice          |        80 |
+|          100 | as restaurant  |   1012 | chicken noodles         |       100 |
+|          101 | bs restaurant  |   1013 | chappathi               |        50 |
+|          101 | bs restaurant  |   1014 | dosa                    |        60 |
+|          101 | bs restaurant  |   1015 | naan with chicken gravy |       250 |
+|          102 | cs restaurant  |   1016 | idly                    |        30 |
+|          102 | cs restaurant  |   1017 | chicken fried rice      |       120 |
+|          103 | ds restaurant  |   1018 | egg noodles             |        80 |
+|          103 | ds restaurant  |   1019 | boori                   |        50 |
+|          104 | es restaurant  |   1020 | parotta                 |        40 |
++--------------+----------------+--------+-------------------------+-----------+
+11 rows in set (0.00 sec)
+
+mysql> select r.restaurantid,r.restaurantname,m.menuid,m.menuname,m.menuprice from restaurants r left join resmenu m on r.restaurantid=m.restid where r.restaurantcity='bsss';
++--------------+----------------+--------+-------------------------+-----------+
+| restaurantid | restaurantname | menuid | menuname                | menuprice |
++--------------+----------------+--------+-------------------------+-----------+
+|          101 | bs restaurant  |   1013 | chappathi               |        50 |
+|          101 | bs restaurant  |   1014 | dosa                    |        60 |
+|          101 | bs restaurant  |   1015 | naan with chicken gravy |       250 |
++--------------+----------------+--------+-------------------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from orders where customerid='aa@gmail.com';
++---------+--------------+------------+-----------------+-------------+
+| orderid | customerid   | orderdate  | deliveryaddress | orderstatus |
++---------+--------------+------------+-----------------+-------------+
+|     200 | aa@gmail.com | 2021-06-07 | bss             | confirmed   |
+|     201 | aa@gmail.com | 2021-06-17 | bss             | confirmed   |
+|     202 | aa@gmail.com | 2020-12-12 | bss             | cancelled   |
+|     203 | aa@gmail.com | 2021-05-12 | bss             | confirmed   |
+|     204 | aa@gmail.com | 2021-02-24 | bss             | cancelled   |
+|     205 | aa@gmail.com | 2021-03-08 | bss             | confirmed   |
++---------+--------------+------------+-----------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from orders o left join ordermenus os on o.orderid=os.orderid where customerid="bb@gmail.com";
++---------+--------------+------------+-----------------+-------------+---------+--------+---------+-----------+
+| orderid | customerid   | orderdate  | deliveryaddress | orderstatus | orderid | menuid | menuqty | menuprice |
++---------+--------------+------------+-----------------+-------------+---------+--------+---------+-----------+
+|     206 | bb@gmail.com | 2019-10-05 | ass             | confirmed   |     206 |   1011 |       2 |       160 |
+|     207 | bb@gmail.com | 2021-06-30 | ass             | confirmed   |     207 |   1013 |       1 |        50 |
++---------+--------------+------------+-----------------+-------------+---------+--------+---------+-----------+
+2 rows in set (0.00 sec)
+
+select * from orders where customerid="aa@gmail.com" order by orderdate desc limit 5;
++---------+--------------+------------+-----------------+-------------+
+| orderid | customerid   | orderdate  | deliveryaddress | orderstatus |
++---------+--------------+------------+-----------------+-------------+
+|     201 | aa@gmail.com | 2021-06-17 | bss             | confirmed   |
+|     200 | aa@gmail.com | 2021-06-07 | bss             | confirmed   |
+|     203 | aa@gmail.com | 2021-05-12 | bss             | confirmed   |
+|     205 | aa@gmail.com | 2021-03-08 | bss             | confirmed   |
+|     204 | aa@gmail.com | 2021-02-24 | bss             | cancelled   |
++---------+--------------+------------+-----------------+-------------+
+5 rows in set (0.06 sec)
