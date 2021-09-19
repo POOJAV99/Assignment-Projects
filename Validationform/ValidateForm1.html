@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+<script>
+     function ValidateForm()
+	 {
+	      var username=document.myform.uname.value;
+		  var password=document.myform.pwd.value;
+		  var rpassword=document.myform.repwd.value;
+		  var email=document.myform.email.value;
+		  var atposition=email.indexOf('@');
+		  var dotposition=email.lastIndexOf('.');
+		  if(username == null || username== "")
+		  {
+			 document.getElementById("un").innerHTML="<b>username cannot be empty</b>";
+			  return false;
+		  }
+		  else if(password.length < 6)
+		  {
+			  document.getElementById("pw").innerHTML="<b>password cannot be less than 6 character</b>";
+			  return false;
+		  }
+		  else if(rpassword.length < 6)
+		  {
+			  document.getElementById("rpw").innerHTML="<b>password cannot be less than 6 character</b>";
+			  return false;
+		  }
+		  else if(password!=rpassword)
+		  {
+			  document.getElementById("pw").innerHTML="<b>Passwords are not match</b>";
+			  return false;
+		  }
+		  else if(email== null || email=="" || atposition<1 || dotposition<atposition+2 || dotposition+2>=email.length)
+		 {
+				 document.getElementById("emailid").innerHTML="<b>Invaild email address</b>";
+				 return false;
+		}
+		else
+		{
+			return true;
+		}
+    }
+	</script>
+ </head>
+ <body>
+  <form name="myform" method="post" action="https://www.youtube.com" onsubmit="return ValidateForm();">
+ User name:<br/>
+ <input type="text" name="uname"/><span id="un"></span><br/>
+ Password:<br/>
+ <input type="password" name="pwd"/><span id="pw"></span><br/>
+ Re-type password:<br/>
+ <input type="password" name="repwd"/><span id="rpw"></span><br/>
+ Email:<br/>
+ <input type="text" name="email"/><span id="emailid"></span><br/>
+ <input type="submit" value="submit"/><br/>
+ </form>
+ </body>
+</html>
