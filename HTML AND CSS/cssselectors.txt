@@ -1,0 +1,144 @@
+The CSS element Selector:
+p {
+  text-align: center;
+  color: blue;
+}
+
+The CSS id Selector:
+#para1 {
+  text-align: center;
+  color: blue;
+}
+The CSS class Selector:
+.center {
+  text-align: center;
+  color: pink;
+}
+p.center {
+  text-align: center;
+  color: linen;
+}
+The CSS Universal Selector:
+* {
+  text-align: center;
+  color: red;
+}
+The CSS Grouping Selector:
+h1 {
+  text-align: center;
+  color: orange;
+}
+
+h2 {
+  text-align: center;
+  color: blue;
+}
+
+p {
+  text-align: center;
+  color: red;
+}
+h1, h2, p {
+  text-align: center;
+  color: red;
+}
+Descendant Selectors:
+div p {
+  background-color: yellow;
+}
+Child Selector:
+div > p {
+  background-color: yellow;
+}
+Adjacent Sibling Selector (+):
+div + p {
+  background-color: yellow;
+}
+General Sibling Selector (~):
+div ~ p {
+  background-color: yellow;
+}
+
+Anchor Pseudo-classes:
+selector:pseudo-class {
+  property: value;
+}
+a:link {
+  color: #FF0000;
+}
+a:visited {
+  color: #00FF00;
+}
+a:hover {
+  color: #FF00FF;
+}
+a:active {
+  color: #0000FF;
+}
+Pseudo-classes and CSS Classes:
+a.highlight:hover {
+  color: #ff0000;
+}
+Hover on <div>:
+div:hover {
+  background-color: blue;
+}
+Simple Tooltip Hover:
+p {
+  display: none;
+  background-color: yellow;
+  padding: 20px;
+}
+
+div:hover p {
+  display: block;
+}
+Match the first <p> element:
+p:first-child {
+  color: blue;
+}
+Match the first <i> element in all <p> elements:
+p i:first-child {
+  color: blue;
+}
+CSS [attribute] Selector:
+a[target] {
+  background-color: yellow;
+}
+CSS [attribute="value"] Selector:
+a[target="_blank"] {
+  background-color: yellow;
+}
+CSS [attribute~="value"] Selector:
+[title~="flower"] {
+  border: 5px solid yellow;
+}
+CSS [attribute|="value"] Selector:
+[class|="top"] {
+  background: yellow;
+}
+CSS [attribute^="value"] Selector:
+[class^="top"] {
+  background: yellow;
+}
+CSS [attribute$="value"] Selector:
+[class$="test"] {
+  background: yellow;
+}
+CSS [attribute*="value"] Selector:
+[class*="te"] {
+  background: yellow;
+}
+Styling Forms:
+input[type="text"] {
+  width: 150px;
+  display: block;
+  margin-bottom: 10px;
+  background-color: yellow;
+}
+
+input[type="button"] {
+  width: 120px;
+  margin-left: 35px;
+  display: block;
+}

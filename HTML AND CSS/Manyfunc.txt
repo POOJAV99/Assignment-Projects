@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script type="text/javascript">
+  function oddOrEven(a)
+  {
+	  if(a%2==0)
+	  {
+		  document.write(a+" is even"+"<br>");
+	  }
+	  else
+	  {
+		  document.write(a+" is odd"+"<br>");
+	  }
+  }
+  function armstrongOrnot(a)
+  {
+       var r,sum=0,temp;           
+       temp=a;    
+       while(a>0)    
+       {    
+          r=a%10;    
+          sum=sum+(r*r*r);    
+          a=parseInt(a/10);    
+       }    
+       if(temp==sum)
+	   {
+          document.write(temp+" is armstrong number"+"<br>");
+	   }
+       else 
+	   {
+          document.write(temp+"is not armstrong number"+"<br>");      
+       }
+   }
+   function PrimeOrNot(a)
+   {
+       var m=0,flag=0;      
+       m=parseInt(a/2);    
+       for(let i=2;i<=m;i++)    
+       {    
+          if(a%i==0)    
+          {    
+            document.write(a+" is not prime"+"<br>");    
+            flag=1;    
+            break;    
+          }    
+       }    
+       if(flag==0)
+	   {
+          document.write(a+" is prime"+"<br>");
+	   }
+	}
+	function PalindromeOrNot(a)
+	{
+	   var r,sum=0,temp;        
+       temp=a;    
+       while(a>0)    
+       {    
+          r=a%10;    
+          sum=(sum*10)+r;    
+          a=parseInt(a/10);    
+       }
+       if(temp==sum)
+	   {
+          document.write(temp+" is palindrome number"+"<br>");
+	   }
+       else  
+	   {
+          documwnt.write(temp+" is not palindrome"+"<br>");
+	   }
+	 }
+  </script>
+ </head>
+ <body>
+  <script>
+  var a=parseInt(prompt("enter a number:",0));
+  oddOrEven(a);
+  armstrongOrnot(a);
+  PrimeOrNot(a);
+  PalindromeOrNot(a);
+  </script>
+ </body>
+</html>
